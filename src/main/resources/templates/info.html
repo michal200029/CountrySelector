@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta Info="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <table class="table table-responsive table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name</td>
+                    <td th:text="${info.getName()}"/>
+                </tr>
+                <tr>
+                    <td>Capital</td>
+                    <td th:text="${info.getCapital()}"/></td>
+                </tr>
+                <tr>
+                    <td>Population</td>
+                    <td th:text="${info.getPopulation()}"/>
+                </tr>
+                <tr>
+                    <td>Area</td>
+                    <td th:text="${info.getArea()}"/>
+                </tr>
+                <tr>
+                    <td>Alpha code</td>
+                    <td th:text="${info.getAlpha2Code()}"/>
+                </tr>
+                <tr>
+                    <td>Domain</td>
+                    <td>
+                        <p th:each="domain: ${info.getTopLevelDomain()}">
+                            <span th:text="${domain}" />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Currency</td>
+                    <td>
+                        <p th:each="currency: ${info.getCurrencies()}">
+                            <span th:text="${currency.getName()}" />
+                            [<span th:text="${currency.getSymbol()}" />]
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Time zones</td>
+                    <td>
+                        <p th:each="zone: ${info.getTimezones()}">
+                            <span th:text="${zone}" />
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Flag</td>
+                    <td><img th:src="${info.getFlag()}" height="80px" width="80px"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -15,8 +15,8 @@
     <style>#mapid { height: 1900px; }</style>
 </head>
 <body>
-            <div id="mapid"></div>
-<script th:inline="javascript">
+    <div id="mapid"></div>
+    <script  th:inline="javascript">
 
     var points = [[${points}]];
 
@@ -29,8 +29,19 @@
     points.forEach(value => {
         L.marker([value.latitude, value.longitude]).addTo(map)
             .bindPopup(value.countryName)
-            .openPopup();
-    })
-</script>
+            .openPopup()
+            .on('dblclick',onClick)
+            });
+
+    function onClick(e) {
+        var popup = e.target.getPopup();
+        var content = popup.getContent();
+        window.open(`info?name=${content}`, 'infoWindow','location=1,status=1,scrollbars=1, resizable=1, directories=1, toolbar=1, titlebar=1', );
+        }
+
+
+
+   </script>
+
 </body>
 </html>

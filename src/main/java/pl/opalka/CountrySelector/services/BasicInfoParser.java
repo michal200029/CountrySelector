@@ -1,14 +1,20 @@
 package pl.opalka.CountrySelector.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.opalka.CountrySelector.model.Basic;
+import pl.opalka.CountrySelector.model.Info;
 import pl.opalka.CountrySelector.model.Point;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -35,6 +41,18 @@ public class BasicInfoParser {
         }
 
         return pointsList;
+
+    }
+
+    public Info[] getInfo(String name) throws IOException {
+
+        URL url = new URL("https://restcountries.eu/rest/v2/name/"+name+"?fields=name;topLevelDomain;alpha2Code;capital;population;area;flag;timezones;currencies");
+
+       InputStreamReader reader = new InputStreamReader(url.openStream());
+       Info[] info = new Gson().fromJson(reader, Info[].class);
+
+        return info;
+
 
     }
 }
